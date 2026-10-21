@@ -199,7 +199,7 @@ if (heroHeading) {
   }
 
   wireForm("prayerForm", "prayerStatus");
-  wireForm("contactForm", "contactStatus");
+  
 
   /* ---------------------------------------------------------------
      Video fallback: if the browser can't play the source video,
