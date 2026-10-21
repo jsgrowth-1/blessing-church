@@ -198,7 +198,57 @@ if (heroHeading) {
     });
   }
 
-  wireForm("prayerForm", "prayerStatus");
+  /* Prayer Request Form → WhatsApp */
+
+var prayerForm = document.getElementById("prayerForm");
+
+if (prayerForm) {
+  prayerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (!prayerForm.checkValidity()) {
+      prayerForm.reportValidity();
+      return;
+    }
+
+    var name = document.getElementById("prName").value.trim();
+    var email = document.getElementById("prEmail").value.trim();
+    var phone = document.getElementById("prPhone").value.trim();
+    var prayer = document.getElementById("prMessage").value.trim();
+    var privacy = document.getElementById("prPrivacy").checked;
+
+    if (!privacy) {
+      alert("Please confirm the confidentiality option.");
+      return;
+    }
+
+    var message =
+      "🙏 *Blessing Church - Prayer Request*\n\n" +
+      "*Name:* " + name + "\n" +
+      "*Email:* " + email + "\n" +
+      "*Phone:* " + (phone || "Not provided") + "\n\n" +
+      "*Prayer Request:*\n" + prayer + "\n\n" +
+      "*Confidentiality:* Confirmed";
+
+    var whatsappNumber = "919585754422";
+
+    var whatsappURL =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+
+    var status = document.getElementById("prayerStatus");
+
+    if (status) {
+      status.textContent =
+        "WhatsApp opened. Please send your prayer request to complete submission.";
+      status.className = "form-status success";
+    }
+  });
+}
   
 
   /* ---------------------------------------------------------------
